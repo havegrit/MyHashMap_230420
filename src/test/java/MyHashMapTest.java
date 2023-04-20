@@ -18,13 +18,20 @@ class MyHashMapTest {
         assertThat(map.size()).isEqualTo(1);
     }
 
+    @Test
+    void testSize() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        map.put("Key3", 3);
+        assertThat(map.size()).isEqualTo(3);
+    }
+
 //    @Test
 //    void testPutReplace() {
 //        map.put("Key1", 1);
-//        assertEquals(Integer.valueOf(1), map.put("Key1", 2));
+//        assertThat(Integer.valueOf(1), map.put("Key1", 2));
 //        assertEquals(1, map.size());
 //    }
-//
 //    @Test
 //    void testGet() {
 //        map.put("Key1", 1);
@@ -42,14 +49,7 @@ class MyHashMapTest {
 //        assertEquals(1, map.size());
 //    }
 //
-//    @Test
-//    void testSize() {
-//        map.put("Key1", 1);
-//        map.put("Key2", 2);
-//        map.put("Key3", 3);
-//        assertEquals(3, map.size());
-//    }
-//
+
 //    @Test
 //    void testContainsKey() {
 //        map.put("Key1", 1);
