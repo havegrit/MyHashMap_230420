@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,13 +14,15 @@ class MyHashMapTest {
     }
 
     @Test
+    @DisplayName("put() 메소드 호출 시, 단순히 사이즈를 증가")
     void testPut() {
         assertNull(map.put("Key1", 1));
         assertThat(map.size()).isEqualTo(1);
     }
 
     @Test
-    void testSize() {
+    @DisplayName("저장 공간 부족 시, 저장 공간 늘리기")
+    void testPut_2() {
         map.put("Key1", 1);
         map.put("Key2", 2);
         map.put("Key3", 3);
@@ -27,6 +30,7 @@ class MyHashMapTest {
     }
 
     @Test
+    @DisplayName("key 데이터로 value 데이터 가져오기")
     void testGet() {
         map.put("Key1", 1);
         map.put("Key2", 2);
