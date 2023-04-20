@@ -86,4 +86,14 @@ public class MyHashMap<T, T1> {
         }
         return null;
     }
+
+    public void clear() {
+        keyData = new String[2];
+        valueData = new Integer[2];
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
 }

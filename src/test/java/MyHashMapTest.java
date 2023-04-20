@@ -74,14 +74,16 @@ class MyHashMapTest {
         assertThat(map.remove("Key3")).isNull();
         assertThat(map.size()).isEqualTo(1);
     }
-//
-//    @Test
-//    void testClear() {
-//        map.put("Key1", 1);
-//        map.put("Key2", 2);
-//        map.put("Key3", 3);
-//        map.clear();
-//        assertEquals(0, map.size());
-//        assertTrue(map.isEmpty());
-//    }
+
+    @Test
+    @DisplayName("데이터 전체 삭제")
+    void testClear() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        map.put("Key3", 3);
+        map.clear();
+        assertThat(map.get("Key1")).isNull();
+        assertThat(map.size()).isEqualTo(0);
+        assertThat(map.isEmpty()).isTrue();
+    }
 }
