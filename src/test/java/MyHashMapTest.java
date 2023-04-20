@@ -56,21 +56,24 @@ class MyHashMapTest {
         assertThat(map.containsValue(3)).isFalse();
     }
 
-//    @Test
-//    void testPutReplace() {
-//        map.put("Key1", 1);
-//        assertThat(Integer.valueOf(1), map.put("Key1", 2));
-//        assertEquals(1, map.size());
-//    }
+    @Test
+    @DisplayName("데이터 대체")
+    void testPutReplace() {
+        map.put("Key1", 1);
+        assertThat(map.put("Key1", 2)).isEqualTo(1);
+        assertThat(map.size()).isEqualTo(1);
+        assertThat(map.get("Key1")).isEqualTo(2);
+    }
 
-//    @Test
-//    void testRemove() {
-//        map.put("Key1", 1);
-//        map.put("Key2", 2);
-//        assertEquals(Integer.valueOf(1), map.remove("Key1"));
-//        assertNull(map.remove("Key3"));
-//        assertEquals(1, map.size());
-//    }
+    @Test
+    @DisplayName("한 개 데이터 삭제")
+    void testRemove() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        assertThat(map.remove("Key1")).isEqualTo(1);
+        assertThat(map.remove("Key3")).isNull();
+        assertThat(map.size()).isEqualTo(1);
+    }
 //
 //    @Test
 //    void testClear() {
