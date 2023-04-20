@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MyHashMap<T, T1> {
     String[] keyData = new String[2];
     Integer[] valueData = new Integer[2];
@@ -88,8 +90,8 @@ public class MyHashMap<T, T1> {
     }
 
     public void clear() {
-        keyData = new String[2];
-        valueData = new Integer[2];
+        Arrays.fill(keyData, null);
+        Arrays.fill(valueData, null);
         size = 0;
     }
 
