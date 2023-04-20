@@ -1,5 +1,3 @@
-import java.util.stream.IntStream;
-
 public class MyHashMap<T, T1> {
     String[] keyData = new String[2];
     Integer[] valueData = new Integer[2];
@@ -40,5 +38,14 @@ public class MyHashMap<T, T1> {
     }
     private boolean ifNotEnough() {
         return size == keyData.length-1;
+    }
+
+    public boolean containsKey(String key) {
+        for (int i = 0; i < size; i++) {
+            if (keyData[i].equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

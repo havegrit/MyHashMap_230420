@@ -38,6 +38,15 @@ class MyHashMapTest {
         assertThat(map.get("Key2")).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("key 데이터 포함 여부 확인")
+    void testContainsKey() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        assertThat(map.containsKey("Key1")).isTrue();
+        assertThat(map.containsKey("Key3")).isFalse();
+    }
+
 //    @Test
 //    void testPutReplace() {
 //        map.put("Key1", 1);
@@ -54,14 +63,6 @@ class MyHashMapTest {
 //        assertEquals(1, map.size());
 //    }
 //
-
-//    @Test
-//    void testContainsKey() {
-//        map.put("Key1", 1);
-//        map.put("Key2", 2);
-//        assertTrue(map.containsKey("Key1"));
-//        assertFalse(map.containsKey("Key3"));
-//    }
 //
 //    @Test
 //    void testContainsValue() {
