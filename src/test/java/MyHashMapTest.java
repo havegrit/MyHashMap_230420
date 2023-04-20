@@ -3,7 +3,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class MyHashMapTest {
     private MyHashMap<String, Integer> map;
@@ -16,7 +15,7 @@ class MyHashMapTest {
     @Test
     @DisplayName("put() 메소드 호출 시, 단순히 사이즈를 증가")
     void testPut() {
-        assertNull(map.put("Key1", 1));
+        assertThat(map.put("Key1", 1)).isEqualTo(1);
         assertThat(map.size()).isEqualTo(1);
     }
 
@@ -60,7 +59,7 @@ class MyHashMapTest {
     @DisplayName("데이터 대체")
     void testPutReplace() {
         map.put("Key1", 1);
-        assertThat(map.put("Key1", 2)).isEqualTo(1);
+        assertThat(map.put("Key1", 2)).isEqualTo(2);
         assertThat(map.size()).isEqualTo(1);
         assertThat(map.get("Key1")).isEqualTo(2);
     }

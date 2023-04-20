@@ -1,26 +1,32 @@
 import java.util.Arrays;
 
-public class MyHashMap<T, T1> {
-    String[] keyData = new String[2];
-    Integer[] valueData = new Integer[2];
-    Integer size = 0;
+public class MyHashMap<K, V> {
+    K[] keyData;
+    V[] valueData;
+    Integer size;
 
-    public Integer put(String key, Integer value) {
+    public MyHashMap() {
+        this.keyData = (K[]) new Object[2];
+        this.valueData = (V[]) new Object[2];
+        this.size = 0;
+    }
+
+    public V put(K key, V value) {
         makeNewDataIfNotEnough();
         if (containsKey(key)) {
             valueData[indexOf(key)] = value;
-            return 1;
+            return value;
         }
         keyData[size] = key;
         valueData[size++] = value;
-        return null;
+        return value;
     }
 
     public Integer size() {
         return size;
     }
 
-    public Integer get(String key) {
+    public V get(K key) {
         for (int i = 0; i < size; i++) {
             if (keyData[i].equals(key)) {
                 return valueData[i];
@@ -35,8 +41,8 @@ public class MyHashMap<T, T1> {
         }
     }
     private void makeNewData() {
-        String[] newKeyData = new String[keyData.length * 2];
-        Integer[] newValueData = new Integer[valueData.length * 2];
+        K[] newKeyData = (K[]) new Object[keyData.length * 2];
+        V[] newValueData = (V[]) new Object[valueData.length * 2];
         System.arraycopy(keyData, 0, newKeyData, 0, keyData.length);
         System.arraycopy(valueData, 0, newValueData, 0, valueData.length);
         keyData = newKeyData;
@@ -46,7 +52,7 @@ public class MyHashMap<T, T1> {
         return size == keyData.length-1;
     }
 
-    private Integer indexOf(String key) {
+    private int indexOf(K key) {
         for (int i = 0; i < size; i++) {
             if (keyData[i].equals(key)) {
                 return i;
@@ -55,7 +61,7 @@ public class MyHashMap<T, T1> {
         return -1;
     }
 
-    public boolean containsKey(String key) {
+    public boolean containsKey(K key) {
         for (int i = 0; i < size; i++) {
             if (keyData[i].equals(key)) {
                 return true;
@@ -64,7 +70,7 @@ public class MyHashMap<T, T1> {
         return false;
     }
 
-    public boolean containsValue(Integer value) {
+    public boolean containsValue(V value) {
         for (int i = 0; i < size; i++) {
             if (valueData[i].equals(value)) {
                 return true;
@@ -73,10 +79,10 @@ public class MyHashMap<T, T1> {
         return false;
     }
 
-    public Integer remove(String key) {
+    public V remove(K key) {
         if (containsKey(key)) {
             int index = indexOf(key);
-            Integer targetValue = valueData[index];
+            V targetValue = valueData[index];
             for (int i = index; i < size-1; i++) {
                 keyData[i] = keyData[i + 1];
                 valueData[i] = valueData[i + 1];
