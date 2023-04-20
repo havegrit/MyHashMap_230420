@@ -1,24 +1,35 @@
 import java.util.Arrays;
 
 public class MyHashMap<K, V> {
-    private K[] keyData;
-    private V[] valueData;
+
+    private static class Entry<K, V> {
+        K key;
+        V value;
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+    private Entry<K, V>[] entries;
+
     private Integer size;
 
     public MyHashMap() {
-        this.keyData = (K[]) new Object[2];
-        this.valueData = (V[]) new Object[2];
+        this(2);
+    }
+
+    public MyHashMap(int arrayLength) {
+        this.entries = new Entry[arrayLength];
         this.size = 0;
     }
 
     public V put(K key, V value) {
         makeNewDataIfNotEnough();
         if (containsKey(key)) {
-            valueData[indexOf(key)] = value;
+            entries[indexOf(key)].value = value;
             return value;
         }
-        keyData[size] = key;
-        valueData[size++] = value;
+        entries[size++] = new Entry(key, value);
         return value;
     }
 
@@ -28,8 +39,8 @@ public class MyHashMap<K, V> {
 
     public V get(K key) {
         for (int i = 0; i < size; i++) {
-            if (keyData[i].equals(key)) {
-                return valueData[i];
+            if (entries[i].key.equals(key)) {
+                return (V) entries[i].value;
             }
         }
         return null;
@@ -41,20 +52,17 @@ public class MyHashMap<K, V> {
         }
     }
     private void makeNewData() {
-        K[] newKeyData = (K[]) new Object[keyData.length * 2];
-        V[] newValueData = (V[]) new Object[valueData.length * 2];
-        System.arraycopy(keyData, 0, newKeyData, 0, keyData.length);
-        System.arraycopy(valueData, 0, newValueData, 0, valueData.length);
-        keyData = newKeyData;
-        valueData = newValueData;
+        Entry<K, V>[] newEntries = new Entry[entries.length * 2];
+        System.arraycopy(entries, 0, newEntries, 0, entries.length);
+        entries = newEntries;
     }
     private boolean ifNotEnough() {
-        return size == keyData.length-1;
+        return size == entries.length-1;
     }
 
     private int indexOf(K key) {
         for (int i = 0; i < size; i++) {
-            if (keyData[i].equals(key)) {
+            if (entries[i].key.equals(key)) {
                 return i;
             }
         }
@@ -63,7 +71,7 @@ public class MyHashMap<K, V> {
 
     public boolean containsKey(K key) {
         for (int i = 0; i < size; i++) {
-            if (keyData[i].equals(key)) {
+            if (entries[i].key.equals(key)) {
                 return true;
             }
         }
@@ -72,7 +80,7 @@ public class MyHashMap<K, V> {
 
     public boolean containsValue(V value) {
         for (int i = 0; i < size; i++) {
-            if (valueData[i].equals(value)) {
+            if (entries[i].value.equals(value)) {
                 return true;
             }
         }
@@ -82,13 +90,11 @@ public class MyHashMap<K, V> {
     public V remove(K key) {
         if (containsKey(key)) {
             int index = indexOf(key);
-            V targetValue = valueData[index];
+            V targetValue = (V) entries[index].value;
             for (int i = index; i < size-1; i++) {
-                keyData[i] = keyData[i + 1];
-                valueData[i] = valueData[i + 1];
+                entries[i].key = entries[i + 1].key;
+                entries[i].value = entries[i + 1].value;
             }
-            keyData[size-1] = null;
-            valueData[size-1] = null;
             size--;
             return targetValue;
         }
@@ -96,8 +102,7 @@ public class MyHashMap<K, V> {
     }
 
     public void clear() {
-        Arrays.fill(keyData, null);
-        Arrays.fill(valueData, null);
+        Arrays.fill(entries, null);
         size = 0;
     }
 
