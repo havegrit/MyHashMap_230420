@@ -48,4 +48,13 @@ public class MyHashMap<T, T1> {
         }
         return false;
     }
+
+    public boolean containsValue(Integer value) {
+        for (int i = 0; i < size; i++) {
+            if (valueData[i].equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
