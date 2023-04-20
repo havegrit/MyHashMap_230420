@@ -1,9 +1,9 @@
 import java.util.Arrays;
 
 public class MyHashMap<K, V> {
-    K[] keyData;
-    V[] valueData;
-    Integer size;
+    private K[] keyData;
+    private V[] valueData;
+    private Integer size;
 
     public MyHashMap() {
         this.keyData = (K[]) new Object[2];
