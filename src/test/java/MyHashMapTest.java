@@ -26,20 +26,21 @@ class MyHashMapTest {
         assertThat(map.size()).isEqualTo(3);
     }
 
+    @Test
+    void testGet() {
+        map.put("Key1", 1);
+        map.put("Key2", 2);
+        assertThat(map.get("Key1")).isEqualTo(1);
+        assertThat(map.get("Key2")).isEqualTo(2);
+    }
+
 //    @Test
 //    void testPutReplace() {
 //        map.put("Key1", 1);
 //        assertThat(Integer.valueOf(1), map.put("Key1", 2));
 //        assertEquals(1, map.size());
 //    }
-//    @Test
-//    void testGet() {
-//        map.put("Key1", 1);
-//        map.put("Key2", 2);
-//        assertEquals(Integer.valueOf(1), map.get("Key1"));
-//        assertEquals(Integer.valueOf(2), map.get("Key2"));
-//    }
-//
+
 //    @Test
 //    void testRemove() {
 //        map.put("Key1", 1);
